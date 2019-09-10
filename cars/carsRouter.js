@@ -61,4 +61,18 @@ router.put('/:id', (req, res) => {
         })
 })
 
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+    db.remove(id)
+        .then(deleted => {
+            res.status(200).json({message: "Record deleted!"})
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Unable to delete that record.",
+                error: err
+            })
+        })
+})
+
 module.exports = router;
